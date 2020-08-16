@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap');
+
+$background: #eee ;
+$white: #fff;
+$text: #121212;
+// $shadow; #
+$border: #ccc;
+$error: #c21807;
+$blue: #2AB7CA;
+
+.page {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: $background;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  user-select: none;
+}
+
+.header {
+  margin-bottom: 0;
+  position: relative;
+
+  &__text {
+    font-size: 81px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    color: $text;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 0 44px;
+    text-align: center;
+    opacity: .35
+  }
+}
+
+.form {
+  background-color: $white;
+  padding: 45px 15px;
+  box-sizing: border-box;
+  width: 95vw;
+  max-width: 1366px;
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px 3px $border;
+
+  &__row {
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    position: relative;
+
+    &:not(:first-child) {
+      margin-top: 50px;
+    }
+  }
+
+  &__block {
+    width: 100%;
+    
+    &:not(:last-child) {
+      margin-right: 100px;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    width: 100%;  
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    &--file {
+      cursor: pointer;
+    }
+  }
+
+  &__text {
+    &--header {
+      font-size: 45px;
+      font-weight: 400;
+      color: $text;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__input,
+  &__textarea,
+  &__input-placeholder,
+  &__textarea-placeholder {
+    font-size: 36px;
+    font-weight: 300;
+    color: $text;
+  }
+
+  &__textarea {
+    resize: none;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    font-size: 36px;
+    font-weight: 300; 
+    font-family: "Roboto", Arial, sans-serif;
+    box-sizing: border-box;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 3px solid $border;
+    transition: .2s ease-in-out;
+
+    &-placeholder {
+      display: block;
+      opacity: .5;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      transition: .2s ease-in-out;
+      pointer-events: none;
+      color: $border;
+    }
+
+    &-border {
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+
+      &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: $text;
+        transform: translateX(-100%);
+        transition: .2s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &:invalid,
+    &--has-error {
+      outline: none;
+      box-shadow: none;
+      border-color: $error;
+      color: $error;
+    }
+
+    &:invalid ~ &-placeholder,
+    &--has-error ~ &-placeholder {
+      color: $error;
+    }
+
+    &:invalid ~ &-border,
+    &--has-error ~ &-border {
+      &:before {
+        background-color: $error;
+      }
+    }
+
+    &:active ~ &-placeholder,
+    &:focus ~ &-placeholder,
+    &--active ~ &-placeholder,
+    &--not-empty ~ &-placeholder  {
+        opacity: 1;
+        transform: scale(.5) translateY(-100%);
+        color: $text;
+    }
+
+    &:active ~ &-border,
+    &:focus ~ &-border,
+    &--active ~ &-border,
+    &--not-empty ~ &-border {
+        opacity: 1;
+
+        &:before {
+          transform: translateX(0);
+        }
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__submit {
+    font-size: 36px;
+    font-weight: 900;
+    color: $white;
+    background-color: $blue;
+    width: 25%;
+    height: 77px;
+    cursor: pointer;
+  }
+
+  &__file {
+    display: none;
+
+    &-img {
+      width: 77px;
+      height: 77px;
+      display: inline-block;
+      vertical-align: middle;
+      object-fit: contain;
+      object-position: center;
+      margin-right: 25px;
+    }
+
+    &-text {
+      font-size: 36px;
+      font-weight: 900;
+      vertical-align: middle;
+    }
+
+    &-clear {
+      display: inline-block;
+      margin-left: 20px;
+      font-size: 2em;
+      font-weight: 900;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    &-error {
+      display: block;
+      font-size: 1.25em;
+      color: $error;
+      margin-top: 25px;
+    }
+  }
+
+  &__button {
+    &-delete {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      right: 44px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0;
+      cursor: pointer;
+      
+      &:active,
+      &:focus {
+        outline: none
+      }
+
+      &-img {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  }
+}
