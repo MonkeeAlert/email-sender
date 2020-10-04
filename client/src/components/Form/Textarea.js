@@ -1,30 +1,39 @@
 import React, { useState  } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export const Textarea = props => {
-  const [value, setValue] = useState(props.value);
+export const Textarea = ({ value, id, placeholder, action }) => {
+  const [val, setVal] = useState(value);
   const [isActive, setActive] = useState(false);
   
   const dispatch = useDispatch();
   
   const onChange = e => {
-    dispatch(props.action( e.target.value ));
-    setValue(e.target.value);
+    dispatch(action( e.target.value ));
+    setVal(e.target.value);
   }
 
   return(
-    <label htmlFor={props.id} className="form__label">
+    <label htmlFor={id} className="form__label">
       <textarea 
-        id={props.id} 
-        name={props.id} 
-        className={`form__textarea ${isActive ? 'form__textarea--active' : ''} ${value !== '' ? 'form__textarea--not-empty' : ''}`}
+        id={id} 
+        name={id} 
+        className={`form__textarea ${isActive ? 'form__textarea--active' : ''} ${val !== '' ? 'form__textarea--not-empty' : ''}`}
         onFocus={_ => setActive(false)}
         onBlur={_ => setActive(false)}
         onChange={ e => onChange(e) }
         rows="8"
+        data-test="textarea"
       />
-      <span className="form__textarea-placeholder">{props.placeholder}</span>
+      <span className="form__textarea-placeholder">{placeholder}</span>
       <span className="form__textarea-border"></span>
     </label>
   )
 }
+
+Textarea.propTypes = {
+  value: PropTypes.string,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  action: PropTypes.func
+};

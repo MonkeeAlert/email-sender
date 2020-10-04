@@ -1,31 +1,40 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export const Input = props => {
-  const [value, setValue] = useState(props.value);
+export const Input = ({ value, id, type, action, placeholder }) => {
+  const [val, setVal] = useState(value);
   const [isActive, setActive] = useState(false);
 
   const dispatch = useDispatch();
 
   const onChange = e => {
-    dispatch(props.action( e.target.value ));
-    setValue(e.target.value);
+    dispatch(action( e.target.value ));
+    setVal(e.target.value);
   }
 
   return(
-    <label htmlFor={props.id} className="form__label">
+    <label htmlFor={id} className="form__label">
       <input 
-        id={ props.id } 
-        name={ props.id } 
-        type={ props.type }
+        id={ id } 
+        name={ id } 
+        type={ type }
         value={ value } 
-        className={`form__input ${isActive ? 'form__input--active' : ''} ${value !== '' ? 'form__input--not-empty' : ''}`}
+        className={`form__input ${isActive ? 'form__input--active' : ''} ${val !== '' ? 'form__input--not-empty' : ''}`}
         onFocus={ _ => setActive(false) }
         onBlur={ _ => setActive(false) }
         onChange={ e => onChange(e) }
       />
-      <span className="form__input-placeholder">{props.placeholder}</span>
+      <span className="form__input-placeholder">{placeholder}</span>
       <span className="form__input-border"></span>
     </label>
   )
-}
+};
+
+Input.propTypes = {
+  value: PropTypes.string,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  action: PropTypes.func
+};

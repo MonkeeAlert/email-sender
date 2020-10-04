@@ -6,7 +6,7 @@ import {Header} from './components/Header/Header';
 function App() {
   return (
     <main>
-      <Header />
+      <Header value="Email Sender" />
       <Form />
     </main>
   );

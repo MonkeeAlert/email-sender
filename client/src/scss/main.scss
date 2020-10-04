@@ -41,7 +41,7 @@ $blue: #2AB7CA;
   width: 95vw;
   max-width: 1366px;
   margin: auto;
-  border-radius: 5px;
+  border-radius: 15px;
   box-shadow: 0 4px 10px 3px $border;
 
   &__row {
@@ -201,6 +201,7 @@ $blue: #2AB7CA;
     background-color: $blue;
     width: 25%;
     height: 77px;
+    border-radius: 10px;
     cursor: pointer;
   }
 

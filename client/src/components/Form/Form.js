@@ -85,6 +85,7 @@ export const Form = _ => {
         action="send" 
         className="form" 
         onSubmit={ e => validateForm(e) }
+        id="email-form"
         >
         <div className="form__row">
           <div className="form__block">
