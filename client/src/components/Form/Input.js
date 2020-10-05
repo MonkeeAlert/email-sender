@@ -19,7 +19,7 @@ export const Input = ({ value, id, type, action, placeholder }) => {
         id={ id } 
         name={ id } 
         type={ type }
-        value={ value } 
+        value={ val } 
         className={`form__input ${isActive ? 'form__input--active' : ''} ${val !== '' ? 'form__input--not-empty' : ''}`}
         onFocus={ _ => setActive(false) }
         onBlur={ _ => setActive(false) }

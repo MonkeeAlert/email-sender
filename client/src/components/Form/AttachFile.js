@@ -51,7 +51,7 @@ export const AttachFile = ({ formats, maxSize, maxCount, value, action }) => {
   }
 
   return(
-    <div>
+    <div className="form__attach-wrapper">
       <label className="form__label--file">
         <input 
           id="file" 
@@ -79,6 +79,6 @@ AttachFile.propTypes = {
   formats : PropTypes.array, 
   maxSize : PropTypes.number, 
   maxCount : PropTypes.number, 
-  value : PropTypes.string, 
+  value : PropTypes.array, 
   action : PropTypes.func
 }

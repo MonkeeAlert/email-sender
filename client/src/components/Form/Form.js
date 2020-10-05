@@ -89,13 +89,15 @@ export const Form = _ => {
         >
         <div className="form__row">
           <div className="form__block">
-            <h2 className="form__text--header">From:</h2>
+            <h2 className="form__text--header">
+              <span>From</span>
+            </h2>
             <Input 
               id='sender_name'  
               value={form.senderName}
               action={setSenderNameAction} 
               type="text" 
-              placeholder="Name"
+              placeholder='Name'
             />
             <Input 
               id='sender_email' 
@@ -106,7 +108,9 @@ export const Form = _ => {
             />
           </div>
           <div className="form__block">
-            <h2 className="form__text--header">To:</h2>
+            <h2 className="form__text--header">
+              <span>To</span>
+            </h2>
             <Input 
               id='recipicient_name'  
               value={form.recipicientName} 
@@ -146,8 +150,8 @@ export const Form = _ => {
         <div className="form__row">
           <AttachFile 
             id="attachments" 
-            maxSize="5" 
-            maxCount="5" 
+            maxSize={5} 
+            maxCount={5} 
             formats={['.doc', '.docx', '.pdf']} 
             value={[]}
             action={addFilesAction}
