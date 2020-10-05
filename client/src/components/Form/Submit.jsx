@@ -7,7 +7,7 @@ export const Submit = ({ value }) => {
       id="submit" 
       name="submit" 
       type="submit"
-      className="form__submit"
+      className="form__submit button button--blue"
       value={value}
     />
   )

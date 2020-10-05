@@ -44,6 +44,7 @@ app.post('/send', (req, res) => {
       if(err) return console.log(err);
   
       console.log('Message sent: %s', info.messageId);
+      res.json(info);
     })
   })
 })

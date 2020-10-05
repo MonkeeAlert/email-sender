@@ -1,24 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
-import {Input} from './Input';
-import {Textarea} from './Textarea';
-import {AttachFile} from './AttachFile';
-import {Submit} from './Submit';
+import { Input } from './Input';
+import { Textarea } from './Textarea';
+import { AttachFile } from './AttachFile';
+import { Submit } from './Submit';
+import Modal from './Modal';
 
 import { useStore } from 'react-redux';
-import { setSenderNameAction, setSenderEmailAction, setRecipicientNameAction, setRecipicientEmailAction, setSubjectAction, setMessageAction, addFilesAction } from '../../redux/actions';
+import * as actions from '../../redux/actions';
 
 export const Form = _ => {
   const [APIResponse, setAPI] = useState('');
   const form = useStore().getState().form;
   const store = useStore();
+  const modal = useRef();
 
   const validateForm = e => {
     e.preventDefault();
     
     let errors = [];
     let form = store.getState().form; 
-
+    
     [ ...document.querySelectorAll('.form__input--has-error') ].forEach(
       el => el.classList.remove('form__input--has-error')
     );
@@ -70,11 +72,14 @@ export const Form = _ => {
   async function sendData(url, data) {
     fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: data
-    });
+    }).then(
+      res => {
+        modal.current.el.current.querySelector('.modal__text--message').innerHTML = res.status === 200 ? 'Message were successfully sent!' : 'Something is wrong';
+        modal.current.show();
+      }
+    );
   }
 
   useEffect( _ => { callAPI() }, [APIResponse]);
@@ -95,14 +100,14 @@ export const Form = _ => {
             <Input 
               id='sender_name'  
               value={form.senderName}
-              action={setSenderNameAction} 
+              action={actions.setSenderNameAction} 
               type="text" 
               placeholder='Name'
             />
             <Input 
               id='sender_email' 
               value={form.senderMail} 
-              action={setSenderEmailAction} 
+              action={actions.setSenderEmailAction} 
               type="email" 
               placeholder="Email" 
             />
@@ -114,14 +119,14 @@ export const Form = _ => {
             <Input 
               id='recipicient_name'  
               value={form.recipicientName} 
-              action={setRecipicientNameAction} 
+              action={actions.setRecipicientNameAction} 
               type="text" 
               placeholder="Name" 
             />
             <Input 
               id='recipicient_email'  
               value={form.recipicientMail} 
-              action={setRecipicientEmailAction} 
+              action={actions.setRecipicientEmailAction} 
               type="email" 
               placeholder="Email" 
             />
@@ -132,7 +137,7 @@ export const Form = _ => {
           <Input 
             id='subject'  
             value={form.subject} 
-            action={setSubjectAction} 
+            action={actions.setSubjectAction} 
             type="text" 
             placeholder="Subject" 
           />
@@ -142,7 +147,7 @@ export const Form = _ => {
           <Textarea 
             id='message'  
             value={form.message} 
-            action={setMessageAction} 
+            action={actions.setMessageAction} 
             placeholder="Message"
           />
         </div>
@@ -154,10 +159,12 @@ export const Form = _ => {
             maxCount={5} 
             formats={['.doc', '.docx', '.pdf']} 
             value={[]}
-            action={addFilesAction}
+            action={actions.addFilesAction}
           />
           <Submit value="Send"/>
         </div>
+
+        <Modal ref={modal}/>
       </form>
   )
 }
