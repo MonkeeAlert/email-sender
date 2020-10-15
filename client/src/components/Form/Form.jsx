@@ -79,6 +79,11 @@ export const Form = _ => {
         modal.current.el.current.querySelector('.modal__text--message').innerHTML = res.status === 200 ? 'Message were successfully sent!' : 'Something is wrong';
         modal.current.show();
       }
+    ).catch(
+      err => {
+        modal.current.el.current.querySelector('.modal__text--message').innerHTML = 'Failed to fetch';
+        modal.current.show();
+      }
     );
   }
 

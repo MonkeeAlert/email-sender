@@ -8,6 +8,15 @@ $error: #c21807;
 $blue: #008CBA;
 $green: #4CAF50;
 
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .page {
   margin: 0;
   padding: 0;
@@ -352,6 +361,34 @@ $green: #4CAF50;
   }
 }
 
+.footer {
+  margin: 25px 0;
+  opacity: .5;
+
+  &__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 10px auto 0;
+    justify-content: center;
+  }
+  
+  &__text {
+    text-align: center;
+    font-size: 18px;
+    color: $text;
+    
+    &--link {
+      margin: 0 10px;
+      display: block;
+      color: $text;
+      opacity: .75;
+      font-size: 16px;
+      text-decoration: none;
+    }
+  }
+}
+
 @media (max-width: 812px) {
   .form {
     margin-bottom: 40px;
@@ -427,6 +464,12 @@ $green: #4CAF50;
           }
         }
       }
+    }
+  }
+
+  .modal {
+    &__content {
+      width: 75%;
     }
   }
 }
